@@ -20,4 +20,16 @@ RUN useradd -m build -g nix-users
 #RUN chgrp nix-users /nix/var/nix/daemon-socket
 #RUN chmod ug=rwx,o= /nix/var/nix/daemon-socket
 
+RUN bash -l -c 'nix-channel --update'
+RUN bash -l -c 'nix-env -i git'
 
+RUN mkdir -p /root/git
+
+WORKDIR /root/git
+
+RUN bash -l -c 'git clone https://github.com/nixos/nixpkgs'
+
+RUN mkdir /etc/nix
+
+RUN bash -l -c 'nix-env -i man'
+ADD nix.conf /etc/nix
