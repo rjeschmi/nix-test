@@ -33,3 +33,6 @@ RUN mkdir /etc/nix
 
 RUN bash -l -c 'nix-env -i man'
 ADD nix.conf /etc/nix
+
+VOLUME /export
+
